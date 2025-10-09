@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+<header th:fragment="header">
+    <nav class="navbar navbar-expand-lg" style="background-color: #003366;">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand text-white fw-bold" th:href="@{/site/home}">
+                Shop
+            </a>
+
+            <!-- Nút toggle khi màn hình nhỏ -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Nội dung navbar -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Thanh tìm kiếm ở giữa -->
+                <form class="d-flex flex-grow-1 mx-3">
+                    <input class="form-control me-2" type="search" placeholder="Tìm kiếm..." aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">Tìm</button>
+                </form>
+
+                <!-- Menu bên phải -->
+                <ul class="navbar-nav">
+                    <!-- Tài khoản -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            <i class="bi bi-person-circle"></i> Tài khoản
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" style="min-width: 280px;">
+                            <li>
+                                <h4 class="dropdown-header">👋 Xin chào, vui lòng đăng nhập</h4>
+                            </li>
+                            <li class="px-3 py-2">
+                                <div class="d-flex gap-2">
+                                    <a class="btn btn-success flex-fill" th:href="@{/account/login}">Đăng nhập</a>
+                                    <a class="btn btn-dark flex-fill" th:href="@{/account/sign-up}">Đăng ký</a>
+                                </div>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+
+                            <li>
+                                <a class="dropdown-item" th:href="@{/product/list}">
+                                    <i class="bi bi-bag"></i> Đơn hàng của tôi
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" th:href="@{/products/my}">
+                                    <i class="bi bi-box-seam"></i> Sản phẩm đã mua
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Giỏ hàng -->
+                    <li class="nav-item">
+                        <a class="nav-link text-white" th:href="@{/cart/add}">
+                            <i class="bi bi-cart"></i> Giỏ hàng
+                        </a>
+                    </li>
+
+                    <!-- Lọc sản phẩm -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-funnel"></i> Lọc sản phẩm
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- Theo hãng -->
+                            <li><h6 class="dropdown-header">Theo hãng</h6></li>
+                            <li><a class="dropdown-item" th:href="@{/products?brand=iphone}">iPhone</a></li>
+                            <li><a class="dropdown-item" th:href="@{/products?brand=samsung}">Samsung</a></li>
+                            <li><a class="dropdown-item" th:href="@{/products?brand=xiaomi}">Xiaomi</a></li>
+                            <li><hr class="dropdown-divider"></li>
+
+                            <!-- Theo giá -->
+                            <li><h6 class="dropdown-header">Theo giá</h6></li>
+                            <li><a class="dropdown-item" th:href="@{/products?price=duoi-10tr}">Dưới 10 triệu</a></li>
+                            <li><a class="dropdown-item" th:href="@{/products?price=10-20tr}">10 - 20 triệu</a></li>
+                            <li><a class="dropdown-item" th:href="@{/products?price=tren-20tr}">Trên 20 triệu</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+    </nav>
+
+
+</header>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
