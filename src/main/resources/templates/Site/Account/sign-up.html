@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{Layout/Layout}">
 <head>
     <meta charset="UTF-8">
@@ -17,47 +18,62 @@
                     <div class="card-body p-4">
                         <h3 class="mb-4 text-center">Đăng ký tài khoản</h3>
 
-                        <!-- Form chỉ để nhập giao diện, không binding -->
-                        <form action="#" method="post" enctype="multipart/form-data">
+                        <form th:action="@{/account/sign-up}" th:object="${user}" method="post" novalidate>
                             <div class="row g-3">
-                                <div class="col-md-6">
+
+                                <div class="col-md-12">
                                     <label class="form-label">Họ và tên</label>
-                                    <input class="form-control" name="fullName"  required>
+                                    <input type="text" class="form-control" th:field="*{fullname}" placeholder="Nguyễn Văn A" required>
+                                    <small th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}" class="text-danger"></small>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <label class="form-label">Tên đăng nhập</label>
-                                    <input class="form-control" name="username"  required>
-                                </div>
-
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <label class="form-label">Email</label>
-                                    <input class="form-control" type="email" name="email" placeholder="you@email.com" required>
+                                    <input type="email" class="form-control" th:field="*{email}" placeholder="you@email.com" required>
+                                    <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></small>
+                                    <small th:text="${errorEmail}" class="text-danger"></small>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label class="form-label">Số điện thoại</label>
-                                    <input class="form-control" name="phone" placeholder="09xx xxx xxx">
+                                    <input type="text" class="form-control" th:field="*{phone}">
+                                    <small th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="text-danger"></small>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" th:field="*{address}" placeholder="TP.HCM, Hà Nội...">
                                 </div>
 
                                 <div class="col-md-6">
                                     <label class="form-label">Mật khẩu</label>
-                                    <input class="form-control" type="password" name="password" placeholder="••••••••" minlength="6" required>
+                                    <input type="password" class="form-control" th:field="*{password}">
+                                    <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></small>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label class="form-label">Xác nhận mật khẩu</label>
-                                    <input class="form-control" type="password" name="confirmPassword" placeholder="••••••••" minlength="6" required>
+                                    <input type="password" class="form-control" name="confirmPassword">
                                 </div>
 
                             </div>
 
                             <button class="btn btn-primary w-100 mt-4" type="submit">Tạo tài khoản</button>
+
+                            <div class="py-3">
+                                <div th:if="${message}" class="alert alert-success text-center" role="alert">
+                                    <span th:text="${message}"></span>
+                                </div>
+
+                                <div th:if="${errorEmail}" class="alert alert-danger text-center" role="alert">
+                                    <span th:text="${errorEmail}"></span>
+                                </div>
+                            </div>
                         </form>
 
                         <hr class="my-4">
                         <p class="text-center mb-0">
-                            Đã có tài khoản? <a href="/auth/login">Đăng nhập</a>
+                            Đã có tài khoản? <a th:href="@{/account/login}">Đăng nhập</a>
                         </p>
                     </div>
                 </div>
