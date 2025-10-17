@@ -1,10 +1,7 @@
 package poly.edu.contronller.Function.Entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import java.util.List;
 
 @Data
@@ -13,6 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "Categories")
 public class Category {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer categoryID;
@@ -20,7 +18,9 @@ public class Category {
     private String categoryName;
     private String description;
 
+    // Ngăn vòng lặp khi gọi toString() hoặc equals()
     @OneToMany(mappedBy = "category")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private List<Product> products;
-
 }

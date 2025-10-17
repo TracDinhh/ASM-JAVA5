@@ -17,11 +17,6 @@ public class AdminController {
         return "Admin/Dashboard";
     }
 
-    @GetMapping("/product")
-    public String prodcut(){
-        return "Admin/Product";
-    }
-
     @GetMapping("/category")
     public String category(){
         return "Admin/Category";

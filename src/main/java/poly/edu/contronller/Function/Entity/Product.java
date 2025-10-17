@@ -1,10 +1,7 @@
 package poly.edu.contronller.Function.Entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import java.util.List;
 
 @Data
@@ -13,6 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "Products")
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer productID;
@@ -23,10 +21,16 @@ public class Product {
     private String image;
     private String description;
 
+    // Quan hệ nhiều sản phẩm thuộc 1 danh mục
     @ManyToOne
-    @JoinColumn(name = "categoryID")
+    @JoinColumn(name = "CategoryID")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Category category;
 
+    // 1 sản phẩm có thể nằm trong nhiều đơn hàng
     @OneToMany(mappedBy = "product")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private List<OrderDetail> orderDetails;
 }
