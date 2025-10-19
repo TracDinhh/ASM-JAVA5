@@ -22,10 +22,6 @@ public class AdminController {
         return "Admin/Category";
     }
 
-    @GetMapping("/user")
-    public String user(){
-        return "Admin/User";
-    }
 
     @GetMapping("/order")
     public String order(){

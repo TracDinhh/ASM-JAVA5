@@ -2,6 +2,8 @@ package poly.edu.contronller.Function.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -21,6 +23,10 @@ public class Product {
     private String image;
     private String description;
 
+    // đây là giúp lưu cả ngày và h luôn
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createAt = new Date();
+
     // Quan hệ nhiều sản phẩm thuộc 1 danh mục
     @ManyToOne
     @JoinColumn(name = "CategoryID")
@@ -33,4 +39,8 @@ public class Product {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<OrderDetail> orderDetails;
+
+    @ManyToOne
+    @JoinColumn(name = "UserId")
+    private User user;
 }

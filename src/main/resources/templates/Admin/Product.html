@@ -48,6 +48,12 @@
                 <input type="file" name="imageFile" class="form-control">
             </div>
 
+            <div class="col-md-3 mb-3">
+                <label class="form-label">Ngày tạo</label>
+                <input type="text" th:value="${#dates.format(product.createAt, 'dd/MM/yyyy HH:mm')}"
+                       class="form-control" readonly>
+            </div>
+
             <div class="col-md-6 mb-3">
                 <label class="form-label">Mô tả</label>
                 <textarea th:field="*{description}" rows="3" class="form-control"></textarea>
@@ -72,6 +78,7 @@
             <th>Giá</th>
             <th>Danh mục</th>
             <th>Ảnh</th>
+            <th>Ngày tạo</th>
             <th>Thao tác</th>
         </tr>
         </thead>
@@ -86,6 +93,8 @@
                      class="img-thumbnail"
                      style="width:70px;height:70px;object-fit:cover;">
             </td>
+<!--            Fri Oct 11 15:23:54 ICT 2025 nếu ko dung format thì sẽ như này-->
+            <td th:text="${#dates.format(p.createAt, 'dd/MM/yyyy HH:mm')}"></td>
             <td>
                 <a th:href="@{'/admin/product/edit/' + ${p.productID}}"
                    class="btn btn-warning btn-sm">

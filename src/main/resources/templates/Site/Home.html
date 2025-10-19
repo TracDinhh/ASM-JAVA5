@@ -12,64 +12,23 @@
 
 <div  class="container mt-4" layout:fragment="content">
     <!-- Banner -->
-    <div >
-        <img src="/Banner/samsung-s25-ultra-banner.jpg" class="img-fluid rounded-3 w-100" alt="Banner quảng cáo">
+    <div>
+        <img th:src="@{/Banner/samsung-s25-ultra-banner.jpg}"
+             class="img-fluid rounded-3 w-100"
+             alt="Banner quảng cáo">
     </div>
 
     <!-- Điện thoại nổi bật -->
-    <h2 class="mt-5 mb-3">Điện thoại nổi bật</h2>
+    <h2 class="mt-5 mb-3">Tất cả sản phẩm</h2>
     <div class="row row-cols-1 row-cols-md-5 g-4">
-        <div class="col">
-            <div class="card h-100">
-                <img th:src="@{/Iphone/iphone15promax.webp}" class="card-img-top" alt="iPhone 15">
+        <div class="col" th:each="p : ${products}">
+            <div class="card h-100 shadow-sm">
+                <img th:src="@{'/' + ${p.image}}" class="card-img-top" alt="Ảnh sản phẩm">
                 <div class="card-body">
-                    <h5 class="card-title">iPhone 15 Pro Max</h5>
-                    <p class="card-text text-danger fw-bold">30.000.000 ₫</p>
-                    <a th:href="@{/product/detail}" class="btn btn-sm btn-outline-primary">Xem chi tiết</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card h-100">
-                <img th:src="@{/Samsung/samsungultra.jpg}" class="card-img-top" alt="iPhone 15">
-                <div class="card-body">
-                    <h5 class="card-title">Samsung Galaxy S24 Ultra</h5>
-                    <p class="card-text text-danger fw-bold">28.000.000 ₫</p>
-                    <a href="#" class="btn btn-sm btn-outline-primary">Xem chi tiết</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card h-100">
-                <img th:src="@{/Iphone/iphone15promax.webp}" class="card-img-top" alt="iPhone 15">
-                <div class="card-body">
-                    <h5 class="card-title">Xiaomi 13 Pro</h5>
-                    <p class="card-text text-danger fw-bold">18.000.000 ₫</p>
-                    <a href="#" class="btn btn-sm btn-outline-primary">Xem chi tiết</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card h-100">
-                <img th:src="@{/Samsung/samsungultra.jpg}" class="card-img-top" alt="iPhone 15">
-                <div class="card-body">
-                    <h5 class="card-title">Oppo Find X6</h5>
-                    <p class="card-text text-danger fw-bold">15.000.000 ₫</p>
-                    <a href="#" class="btn btn-sm btn-outline-primary">Xem chi tiết</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card h-100">
-                <img th:src="@{/Samsung/realme-note-60-blue-thumb-600x600.jpg}" class="card-img-top" alt="iPhone 15">
-                <div class="card-body">
-                    <h5 class="card-title">Vivo X90</h5>
-                    <p class="card-text text-danger fw-bold">13.000.000 ₫</p>
-                    <a href="#" class="btn btn-sm btn-outline-primary">Xem chi tiết</a>
+                    <h5 class="card-title" th:text="${p.productName}"></h5>
+                    <p class="card-text text-danger fw-bold"
+                       th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')} + ' ₫'"></p>
+                    <a th:href="@{'/product/detail/' + ${p.productID}}" class="btn btn-sm btn-outline-primary mt-2">Xem chi tiết</a>
                 </div>
             </div>
         </div>

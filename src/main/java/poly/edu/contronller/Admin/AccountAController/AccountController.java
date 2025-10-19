@@ -33,15 +33,22 @@ public class AccountController {
             model.addAttribute("message","Email không tồn tại");
         } else if (!user.getPassword().equals(user.getPassword())) {
             model.addAttribute("message","Sai mật khẩu");
-        } else if (!"ADMIN".equalsIgnoreCase(admin.getRole())) {
+        } else if (!"ADMIN".equalsIgnoreCase(admin.getRole()) && !"SUPERADMIN".equalsIgnoreCase(admin.getRole())){
             model.addAttribute("message","Bạn không có quyền truy cập!");
-        } else {
+        }
+//        else if (admin.getRole().equalsIgnoreCase("SUPERADMIN")){
+//            sessionService.set("admin",admin);
+//            return "redirect:/admin/dashboard";}
+        else if (admin.getRole().equalsIgnoreCase("ADMIN")) {
+            sessionService.set("admin", admin);
+            return "redirect:/admin/dashboard";
+        }
+        else {
             sessionService.set("admin",admin);
             return "redirect:/admin/dashboard";
         }
 
-        return "admin/account/login";
-
+        return "Admin/Account/Login";
     }
 
     @GetMapping("/logout")

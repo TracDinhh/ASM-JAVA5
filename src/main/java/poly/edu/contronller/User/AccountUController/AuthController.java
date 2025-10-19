@@ -43,14 +43,14 @@ public class AuthController {
         }
         session.set("user", users);
 
-        return "redirect:/site/home";
+        return "redirect:/home/index";
     }
     /// /////////////////////////////////////////////
 
     @GetMapping("/logout")
     public String logout(){
         session.remove("user");
-        return "redirect:/site/home";
+        return "redirect:/home/index";
     }
     /// ////////////////////////////////////////////
     @GetMapping("/sign-up")

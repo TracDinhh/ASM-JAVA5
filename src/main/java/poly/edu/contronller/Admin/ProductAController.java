@@ -7,15 +7,20 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import poly.edu.contronller.Function.Entity.Category;
 import poly.edu.contronller.Function.Entity.Product;
+import poly.edu.contronller.Function.Entity.User;
 import poly.edu.contronller.Function.Jpa.CategoryDao;
 import poly.edu.contronller.Function.Jpa.ProductDao;
+import poly.edu.contronller.Function.Service.SessionService;
 
 import java.io.File;
 import java.io.IOException;
 
 @Controller
 @RequestMapping("/admin/product")
-public class ProductController {
+public class ProductAController {
+
+    @Autowired
+    SessionService sessionService;
 
     @Autowired
     ProductDao productDao;
@@ -25,6 +30,10 @@ public class ProductController {
 
     @GetMapping("/index")
     public String index(Model model) {
+        User admin = sessionService.get("admin");
+        if (admin == null){
+            return "redirect:/admin/account/login";
+        }
         model.addAttribute("products", productDao.findAll());
         model.addAttribute("product", new Product());
         model.addAttribute("categories", categoryDao.findAll());
@@ -42,7 +51,7 @@ public class ProductController {
             String folder = cat.getCategoryName();
 
             // ✅ Dùng thư mục tĩnh thật mà Tomcat đang dùng khi chạy
-            String uploadDir = new File("target/classes/static/" + folder).getAbsolutePath();
+            String uploadDir = new File("/uploads" + folder).getAbsolutePath();
 
             File dir = new File(uploadDir);
             if (!dir.exists()) dir.mkdirs();
@@ -78,11 +87,14 @@ public class ProductController {
 
         // Lấy sản phẩm cũ trong DB để giữ lại ảnh nếu người dùng không upload mới
         Product oldProduct = productDao.findById(p.getProductID()).orElse(null);
+        if (oldProduct != null) {
+            p.setCreateAt(oldProduct.getCreateAt()); // ✅ Giữ ngày tạo cũ
+        }
 
         if (!file.isEmpty()) {
             // Nếu có upload ảnh mới → lưu ảnh mới
             String folder = cat.getCategoryName();
-            String uploadDir = new File("target/classes/static/" + folder).getAbsolutePath();
+            String uploadDir = new File("/uploads" + folder).getAbsolutePath();
             File dir = new File(uploadDir);
             if (!dir.exists()) dir.mkdirs();
 

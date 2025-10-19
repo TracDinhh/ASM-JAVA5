@@ -32,7 +32,6 @@ public class User {
     private String password;
 
     @NotBlank(message = "Số điện thoại không được để trống")
-    @Pattern(regexp = "^(0[0-9]{9})$", message = "Số điện thoại gồm 9 chữ số")
     private String phone;
 
     private String address;
