@@ -49,23 +49,24 @@ public class ProductAController {
 
         if (!file.isEmpty()) {
             String folder = cat.getCategoryName();
-
-            // ✅ Dùng thư mục tĩnh thật mà Tomcat đang dùng khi chạy
-            String uploadDir = new File("/uploads" + folder).getAbsolutePath();
+            // ✅ Tạo thư mục thực ngoài project
+            String uploadDir = System.getProperty("user.dir") + "/uploads/" + folder;
 
             File dir = new File(uploadDir);
             if (!dir.exists()) dir.mkdirs();
 
             String fileName = file.getOriginalFilename();
-            file.transferTo(new File(dir, fileName));
+            File savedFile = new File(dir, fileName);
+            file.transferTo(savedFile);
 
-            // Lưu đường dẫn tương đối (để hiển thị ảnh)
+            // ✅ Lưu đường dẫn tương đối để hiển thị
             p.setImage(folder + "/" + fileName);
         }
 
         productDao.save(p);
         return "redirect:/admin/product/index";
     }
+
 
 
     @GetMapping("/edit/{id}")

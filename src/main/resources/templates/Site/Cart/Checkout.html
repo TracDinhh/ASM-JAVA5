@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{Layout/Layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Xác nhận thanh toán</title>
+</head>
+<body>
+<div layout:fragment="content" class="container mt-5">
+    <h3>🧾 Xác nhận thanh toán</h3>
+
+    <table class="table table-bordered mt-4">
+        <thead class="table-dark text-center">
+        <tr>
+            <th>Hình ảnh</th>
+            <th>Tên sản phẩm</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Thành tiền</th>
+        </tr>
+        </thead>
+        <tbody class="text-center">
+        <tr th:each="item : ${items}">
+            <td><img th:src="@{'/' + ${item.product.image}}" width="80"></td>
+            <td th:text="${item.product.productName}"></td>
+            <td th:text="${#numbers.formatDecimal(item.price,0,'COMMA',0,'POINT')} + ' ₫'"></td>
+            <td th:text="${item.quantity}"></td>
+            <td th:text="${#numbers.formatDecimal(item.price * item.quantity,0,'COMMA',0,'POINT')} + ' ₫'"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="text-end mt-4">
+        <h4>Tổng cộng:
+            <span th:text="${#numbers.formatDecimal(total,0,'COMMA',0,'POINT')} + ' ₫'"></span>
+        </h4>
+    </div>
+
+    <form th:action="@{/order/confirm}" method="post" class="text-end mt-3">
+        <a href="/cart/view" class="btn btn-outline-secondary">Quay lại giỏ hàng</a>
+        <button type="submit" class="btn btn-success">Xác nhận thanh toán</button>
+    </form>
+</div>
+</body>
+</html>

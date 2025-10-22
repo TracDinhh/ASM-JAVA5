@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{Layout/Layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Đơn hàng của tôi</title>
+</head>
+<body>
+<div layout:fragment="content" class="container mt-5">
+    <h3>Đơn hàng của tôi</h3>
+
+    <table class="table table-bordered text-center align-middle mt-3">
+        <thead class="table-dark">
+        <tr>
+            <th>Mã đơn</th>
+            <th>Ngày đặt</th>
+            <th>Trạng thái</th>
+            <th>Tổng tiền</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="o : ${orders}">
+            <td th:text="${o.orderID}"></td>
+            <td th:text="${#dates.format(o.orderDate, 'dd/MM/yyyy HH:mm')}"></td>
+            <td th:text="${o.status}"></td>
+            <td th:text="${#numbers.formatDecimal(o.totalAmount,0,'COMMA',0,'POINT')} + ' ₫'"></td>
+            <td>
+                <a th:href="@{'/user/order/detail/' + ${o.orderID}}"
+                   class="btn btn-sm btn-outline-info">Xem chi tiết</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${#lists.isEmpty(orders)}" class="alert alert-info text-center mt-3">
+        Bạn chưa có đơn hàng nào.
+    </div>
+</div>
+</body>
+</html>

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -21,6 +22,10 @@ public class Cart {
     @JoinColumn(name = "userID")
     private User user;
 
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    private List<CartItem> items;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CreatedAt")
     private Date createAt = new Date();
 }

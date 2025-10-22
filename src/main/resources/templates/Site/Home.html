@@ -23,7 +23,7 @@
     <div class="row row-cols-1 row-cols-md-5 g-4">
         <div class="col" th:each="p : ${products}">
             <div class="card h-100 shadow-sm">
-                <img th:src="@{'/' + ${p.image}}" class="card-img-top" alt="Ảnh sản phẩm">
+                <img th:src="@{'/uploads/' + ${p.image}}" class="card-img-top" alt="Ảnh sản phẩm">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${p.productName}"></h5>
                     <p class="card-text text-danger fw-bold"
@@ -86,80 +86,8 @@
         </div>
         <!-- thêm nhiều sản phẩm khác -->
     </div>
-
-    <!-- Giảm giá -->
-    <h2 class="mt-5 mb-3">Sản phẩm giảm giá</h2>
-    <div class="row row-cols-1 row-cols-md-5 g-4">
-        <div class="col">
-            <div class="card h-100">
-                <img th:src="@{/Samsung/samsungultra.jpg}" class="card-img-top" alt="Samsung">
-                <div class="card-body">
-                    <h5 class="card-title">Samsung Galaxy S24 Ultra</h5>
-                    <p class="card-text text-muted"><del>28.000.000 ₫</del></p>
-                    <p class="card-text text-danger fw-bold">25.000.000 ₫</p>
-                    <span class="badge bg-danger">-10%</span>
-                    <a href="#" class="btn btn-sm btn-outline-primary mt-2">Xem chi tiết</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card h-100">
-                <img th:src="@{/Samsung/samsungultra.jpg}" class="card-img-top" alt="Samsung">
-                <div class="card-body">
-                    <h5 class="card-title">Samsung Galaxy S24 Ultra</h5>
-                    <p class="card-text text-muted"><del>28.000.000 ₫</del></p>
-                    <p class="card-text text-danger fw-bold">25.000.000 ₫</p>
-                    <span class="badge bg-danger">-10%</span>
-                    <a href="#" class="btn btn-sm btn-outline-primary mt-2">Xem chi tiết</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card h-100">
-                <img th:src="@{/Samsung/samsungultra.jpg}" class="card-img-top" alt="Samsung">
-                <div class="card-body">
-                    <h5 class="card-title">Samsung Galaxy S24 Ultra</h5>
-                    <p class="card-text text-muted"><del>28.000.000 ₫</del></p>
-                    <p class="card-text text-danger fw-bold">25.000.000 ₫</p>
-                    <span class="badge bg-danger">-10%</span>
-                    <a href="#" class="btn btn-sm btn-outline-primary mt-2">Xem chi tiết</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card h-100">
-                <img th:src="@{/Samsung/samsungultra.jpg}" class="card-img-top" alt="Samsung">
-                <div class="card-body">
-                    <h5 class="card-title">Samsung Galaxy S24 Ultra</h5>
-                    <p class="card-text text-muted"><del>28.000.000 ₫</del></p>
-                    <p class="card-text text-danger fw-bold">25.000.000 ₫</p>
-                    <span class="badge bg-danger">-10%</span>
-                    <a href="#" class="btn btn-sm btn-outline-primary mt-2">Xem chi tiết</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hàng mới -->
-    <h2 class="mt-5 mb-3">Hàng mới về</h2>
-    <div class="row row-cols-1 row-cols-md-5 g-4">
-        <div class="col">
-            <div class="card h-100">
-                <img th:src="@{/Samsung/realme-note-60-blue-thumb-600x600.jpg}" class="card-img-top" alt="Vivo">
-                <div class="card-body">
-                    <h5 class="card-title">Vivo X90</h5>
-                    <p class="card-text text-danger fw-bold">13.000.000 ₫</p>
-                    <span class="badge bg-info text-dark">Mới</span>
-                    <a href="#" class="btn btn-sm btn-outline-primary mt-2">Xem chi tiết</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

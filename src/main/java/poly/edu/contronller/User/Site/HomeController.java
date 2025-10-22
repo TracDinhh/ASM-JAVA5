@@ -10,7 +10,7 @@ import poly.edu.contronller.Function.Jpa.ProductDao;
 
 @Controller
 @RequestMapping("/home")
-public class SiteController {
+public class HomeController {
     @Autowired
     ProductDao productDao;
 

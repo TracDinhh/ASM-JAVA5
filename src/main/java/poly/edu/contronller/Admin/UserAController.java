@@ -1,4 +1,4 @@
-package poly.edu.contronller.Admin.AccountAController;
+package poly.edu.contronller.Admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -4,39 +4,49 @@
       layout:decorate="~{Admin/Layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Quản lý đơn hàng</title>
 </head>
 <body>
-    <div>
-        <div layout:fragment="content">
-            <h2 class="mb-4"><i class="bi bi-bag-check"></i> Quản lý đơn hàng</h2>
-            <table class="table table-bordered table-hover">
-                <thead class="table-dark text-center">
-                <tr>
-                    <th>Mã đơn</th>
-                    <th>Khách hàng</th>
-                    <th>Ngày đặt</th>
-                    <th>Tổng tiền</th>
-                    <th>Trạng thái</th>
-                    <th>Thao tác</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>DH001</td>
-                    <td>Nguyễn Văn A</td>
-                    <td>2025-10-06</td>
-                    <td>5.000.000₫</td>
-                    <td><span class="badge bg-warning text-dark">Chờ xử lý</span></td>
-                    <td class="text-center">
-                        <button class="btn btn-sm btn-info"><i class="bi bi-eye"></i></button>
-                        <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div layout:fragment="content">
+    <h2>Quản lý đơn hàng</h2>
 
+    <table class="table table-hover mt-3">
+        <thead class="table-dark text-center">
+        <tr>
+            <th>ID</th>
+            <th>Khách hàng</th>
+            <th>Ngày đặt</th>
+            <th>Tổng tiền</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
+        </tr>
+        </thead>
+        <tbody class="text-center">
+        <tr th:each="o : ${orders}">
+            <td th:text="${o.orderID}"></td>
+            <td th:text="${o.user.fullname}"></td>
+            <td th:text="${#dates.format(o.orderDate, 'dd/MM/yyyy HH:mm')}"></td>
+            <td th:text="${#numbers.formatDecimal(o.totalAmount, 0, 'COMMA', 0, 'POINT')} + ' ₫'"></td>
+            <td>
+                <form th:action="@{/admin/order/updateStatus}" method="post" class="d-inline">
+                    <input type="hidden" name="orderId" th:value="${o.orderID}">
+                    <select name="status" class="form-select form-select-sm d-inline w-auto">
+                        <option value="Chờ xử lý" th:selected="${o.status == 'Chờ xử lý'}">Chờ xử lý</option>
+                        <option value="Đã xác nhận" th:selected="${o.status == 'Đã xác nhận'}">Đã xác nhận</option>
+                        <option value="Đang giao" th:selected="${o.status == 'Đang giao'}">Đang giao</option>
+                        <option value="Hoàn thành" th:selected="${o.status == 'Hoàn thành'}">Hoàn thành</option>
+                        <option value="Hủy đơn" th:selected="${o.status == 'Hủy đơn'}">Hủy đơn</option>
+                    </select>
+                    <button class="btn btn-sm btn-primary">Cập nhật</button>
+                </form>
+            </td>
+            <td>
+                <a th:href="@{'/admin/order/detail/' + ${o.orderID}}"
+                   class="btn btn-sm btn-info">Chi tiết</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

@@ -23,8 +23,4 @@ public class AdminController {
     }
 
 
-    @GetMapping("/order")
-    public String order(){
-        return "Admin/Order";
-    }
 }

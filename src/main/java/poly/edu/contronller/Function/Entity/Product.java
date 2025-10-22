@@ -25,6 +25,7 @@ public class Product {
 
     // đây là giúp lưu cả ngày và h luôn
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CreateAt")
     private Date createAt = new Date();
 
     // Quan hệ nhiều sản phẩm thuộc 1 danh mục

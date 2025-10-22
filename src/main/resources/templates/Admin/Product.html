@@ -86,10 +86,10 @@
         <tr th:each="p : ${products}">
             <td th:text="${p.productID}"></td>
             <td th:text="${p.productName}"></td>
-            <td th:text="${p.price}"></td>
+            <td th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')} + ' ₫'"></td>
             <td th:text="${p.category.categoryName}"></td>
             <td>
-                <img th:src="@{'/' + ${p.image}}"
+                <img th:src="@{'/uploads/' + ${p.image}}"
                      class="img-thumbnail"
                      style="width:70px;height:70px;object-fit:cover;">
             </td>

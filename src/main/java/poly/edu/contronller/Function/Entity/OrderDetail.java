@@ -2,7 +2,9 @@ package poly.edu.contronller.Function.Entity;
 
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "OrderDetails")
 public class OrderDetail{
