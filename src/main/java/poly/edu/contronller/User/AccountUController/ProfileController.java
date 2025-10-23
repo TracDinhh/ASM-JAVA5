@@ -38,6 +38,7 @@ public class ProfileController {
             user.setEmail(update.getEmail());
             user.setPhone(update.getPhone());
             user.setAddress(update.getAddress());
+            user.setPassword(update.getPassword());
             dao.save(user);
 
             sessionService.set("user",user);

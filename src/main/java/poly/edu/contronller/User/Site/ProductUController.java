@@ -25,7 +25,6 @@ public class ProductUController {
     public String detail(@PathVariable("id") Integer id, Model model){
         Product product = productDao.findById(id).orElse(null);
         model.addAttribute("product", product);
-
         return "Site/ProductDetail";
     }
 }

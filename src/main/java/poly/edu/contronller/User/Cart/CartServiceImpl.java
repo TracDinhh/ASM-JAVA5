@@ -47,7 +47,7 @@ public class CartServiceImpl implements CartService {
                     newItem.setCart(cart);
                     newItem.setProduct(product);
                     newItem.setQuantity(0);
-                    newItem.setPrice(product.getPrice()); // ✅ lưu giá sản phẩm tại thời điểm thêm
+                    newItem.setPrice(product.getPrice());
                     return newItem;
                 });
 

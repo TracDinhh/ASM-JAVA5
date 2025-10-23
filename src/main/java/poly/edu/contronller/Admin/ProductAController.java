@@ -49,7 +49,6 @@ public class ProductAController {
 
         if (!file.isEmpty()) {
             String folder = cat.getCategoryName();
-            // ✅ Tạo thư mục thực ngoài project
             String uploadDir = System.getProperty("user.dir") + "/uploads/" + folder;
 
             File dir = new File(uploadDir);
@@ -59,7 +58,6 @@ public class ProductAController {
             File savedFile = new File(dir, fileName);
             file.transferTo(savedFile);
 
-            // ✅ Lưu đường dẫn tương đối để hiển thị
             p.setImage(folder + "/" + fileName);
         }
 
@@ -89,11 +87,10 @@ public class ProductAController {
         // Lấy sản phẩm cũ trong DB để giữ lại ảnh nếu người dùng không upload mới
         Product oldProduct = productDao.findById(p.getProductID()).orElse(null);
         if (oldProduct != null) {
-            p.setCreateAt(oldProduct.getCreateAt()); // ✅ Giữ ngày tạo cũ
+            p.setCreateAt(oldProduct.getCreateAt()); // Giữ ngày tạo cũ
         }
 
         if (!file.isEmpty()) {
-            // Nếu có upload ảnh mới → lưu ảnh mới
             String folder = cat.getCategoryName();
             String uploadDir = new File("/uploads" + folder).getAbsolutePath();
             File dir = new File(uploadDir);
@@ -104,7 +101,6 @@ public class ProductAController {
 
             p.setImage(folder + "/" + fileName);
         } else if (oldProduct != null) {
-            // Nếu KHÔNG upload ảnh mới → giữ ảnh cũ
             p.setImage(oldProduct.getImage());
         }
 

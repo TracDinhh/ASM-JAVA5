@@ -14,9 +14,6 @@ public class HomeController {
     @Autowired
     ProductDao productDao;
 
-    @Autowired
-    CategoryDao categoryDao;
-
     @GetMapping("/index")
     public String home(Model model){
         model.addAttribute("products",productDao.findAllByOrderByCreateAtDesc());

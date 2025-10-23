@@ -25,7 +25,7 @@ public class AccountController {
         return "Admin/Account/Login";
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public String save(@ModelAttribute User user, Model model){
         User admin = dao.findByEmail(user.getEmail());
         
@@ -36,9 +36,6 @@ public class AccountController {
         } else if (!"ADMIN".equalsIgnoreCase(admin.getRole()) && !"SUPERADMIN".equalsIgnoreCase(admin.getRole())){
             model.addAttribute("message","Bạn không có quyền truy cập!");
         }
-//        else if (admin.getRole().equalsIgnoreCase("SUPERADMIN")){
-//            sessionService.set("admin",admin);
-//            return "redirect:/admin/dashboard";}
         else if (admin.getRole().equalsIgnoreCase("ADMIN")) {
             sessionService.set("admin", admin);
             return "redirect:/admin/dashboard";
